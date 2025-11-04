@@ -1,9 +1,9 @@
 from tabulate import tabulate
+import LigaDeportivaAmateur
+import Funciones_Equipos
+import Funciones_MenuPrincipal
 
 def menu_equipos_interno():
-    import LigaDeportivaAmateur
-    import Funciones_Equipos
-    import Funciones_MenuPrincipal
     opcion = 0
     while opcion != 6:
         Funciones_Equipos.menu_equipos_mostrado()
@@ -55,7 +55,7 @@ def actualizar_equipos4(equipos):
     equipo_encontrado = False    #Esto es importante luego
     nombre_equipo = str(input("¿Cual es el nombre del equipo a actualizar?: "))
     for equipo in equipos:
-        if equipo["nombre"] == nombre_equipo:
+        if  nombre_equipo== equipo["nombre"]:
             equipo_encontrado = True
             equipo_actualizado = equipo
             print("Equipo encontrado: ", equipo)
@@ -78,7 +78,7 @@ def actualizar_equipos4(equipos):
                 case _:
                     print("Opción de campo erronea")
     if equipo_encontrado == False:    #Evita posibles comportamientos extraños/bugs etc (Si lo tocas te toco)
-        print("Artículo no encontrado")
+        print("Equipo no encontrado")
     return equipo_actualizado, equipos
 
 def eliminar_equipo5(equipos):
