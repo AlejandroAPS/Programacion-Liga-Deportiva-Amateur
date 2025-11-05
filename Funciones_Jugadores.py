@@ -35,70 +35,83 @@ def alta_jugador1(jugadores, equipos):
     booleano = input("Se encuentran actvivos en la liga? (si/no):").strip().lower()    #Esta parafernalia es porque al hacer bool(input()) si esta lleno da true y si esta vacio da false por lo que siempre daba false porque python es mierda
     nuevoactividad = booleano in ["si", "sì", "s", "true", "1"]   #(Me ayudo chatGPT) es para comparar el input de usuaior a las opciones de esta lista y  asi de true o flase bien porque antes solo devolvia true
     nuevojugador.update({"activo": nuevoactividad })
+    nuevoequipo = str(input("En que equipo juega el jugador?"))
     for equipo in equipos:
-        #ME HE QUEDADO AQUI, ESTA TODo COPIADO Y PEGADO, TIENES QUE HAXCER YN FOR PARA PEDIRLE AL USUAIRO EL NOMBRE DEL EQUIPO AL QUE PERTENECE AL JUGADOR
+        if nuevoequipo == equipo["nombre"]:
+            nuevojugador.update({"id_equipo":nuevoequipo})
+            print("Se ha linkeado el jugador al equipo")
     jugadores.append(nuevojugador) 
     return jugadores
 
 
-def ver_equipos2(equipos): 
-    print(tabulate(equipos))
+def ver_jugador2(jugadores): 
+    print(tabulate(jugadores))
 
-def buscar_ID3(equipos):
+def buscar_ID_jugador3(jugadores):
     busqueda = int(input("Que ID de equipo quieres buscar?"))
-    if busqueda < len(equipos) + 1:
-        for equipo in equipos:
-            if equipo["ID"] == busqueda:
-                print(equipo)
+    if busqueda < len(jugadores) + 1:
+        for jugador in jugadores:
+            if jugador["ID"] == busqueda:
+                print(jugador)
     else:
         print("Artículo no encontrado")
         
-def actualizar_equipos4(equipos):
-    equipo_encontrado = False    #Esto es importante luego
-    nombre_equipo = str(input("¿Cual es el nombre del equipo a actualizar?: "))
-    for equipo in equipos:
-        if  nombre_equipo== equipo["nombre"]:
-            equipo_encontrado = True
-            equipo_actualizado = equipo
-            print("Equipo encontrado: ", equipo)
+def actualizar_jugador4(jugadores, equipos):
+    jugador_encontrado = False    #Esto es importante luego
+    nombre_jugador = str(input("¿Cual es el nombre del equipo a actualizar?: "))
+    for jugador in jugadores:
+        if  nombre_jugador == jugador["nombre"]:
+            jugador_encontrado = True
+            jugador_actualizado = jugador
+            print("Equipo encontrado: ", jugador)
             print("Campos disponibles para actualizar:")
-            for clave in equipos:
+            for clave in jugadores:
                 if clave != "ID":
                     print(clave)
             clave = str(input("Que campo deseas actualizar?")).strip().lower()
             match clave:
                 case "nombre":
-                    Nnombre = str(input("Dime el nuevo nombre del equipo"))
-                    equipo["nombre"] = Nnombre 
-                case "precio":
-                    Nciudad = float(input("Dime donde entrena el equipo ahora:"))
-                    equipo["precio"] = Nciudad
+                    Nnombre = str(input("Dime el nuevo nombre del jugador"))
+                    jugador["nombre"] = Nnombre 
+                case "posicion":
+                    Nposicion = float(input("Dime la nueva posición del jugador:"))
+                    jugador["posicion"] = Nposicion
+                case "equipo_id":
+                    equipo_encontrado = False
+                    Nequipo = str(input("Dime el nombre del equipo al que se traspasa el jugador"))
+                    for equipo in equipos:
+                        if equipo["nombre"] == Nequipo:
+                            equipo_encontrado = True 
+                            jugador["id_equipo"] = equipo["ID"]
+                            print("Equipo asociado correctamente")
+                    if equipo_encontrado == False:
+                        print("Equipo no encontrado") 
                 case "activo":
-                    booleano = (input("Se encuentra activo el equipo?(si/no):")).strip().lower()
-                    Nactivo = booleano in ["si", "sì", "s", "true", "1"]  #Es para que le puedas meter el bicho HAY SI YO QUIERO QUE ME METAN EL BICHO(lo explico arriba)
-                    equipo["activo"] = Nactivo
+                    booleano = (input("Se encuentra activo el jugador?(si/no):")).strip().lower()
+                    Nactivo = booleano in ["si", "sí", "s", "true", "1"]  #Es para que le puedas meter el bicho HAY SI YO QUIERO QUE ME METAN EL BICHO(lo explico arriba)
+                    jugador["activo"] = Nactivo
                 case _:
                     print("Opción de campo erronea")
-    if equipo_encontrado == False:    #Evita posibles comportamientos extraños/bugs etc (Si lo tocas te toco)
+    if jugador_encontrado == False:    #Evita posibles comportamientos extraños/bugs etc (Si lo tocas te toco)
         print("Equipo no encontrado")
-    return equipo_actualizado, equipos
+    return jugador_actualizado, jugadores
 
-def eliminar_equipo5(equipos):
-    equipo_encontrado = False    
+def eliminar_jugador5(jugadores):
+    jugador_encontrado = False    
     nombre_equipo = str(input("¿Cual es el nombre del equipo a eliminar?: "))
-    for equipo in equipos:
-        if equipo["nombre"] == nombre_equipo:
-            equipo_encontrado = True
-            print("Artículo encontrado: ", equipo)
+    for jugador in jugadores:
+        if jugador["nombre"] == nombre_equipo:
+            jugador_encontrado = True
+            print("Artículo encontrado: ", jugador)
             pythonesmierda = (input("Estas seguro de que quieres borrar el artículo(Acción irreversible)(si/no):")).strip().lower()
             seguro = pythonesmierda in ["si", "sì", "s", "true", "1"]  #Es para que le puedas meter el bicho HAY SI DIQUE YO QUIERO QUE ME METAN EL BICHO(lo explico arriba)
             if seguro == True:
-               equipos.remove(equipo) 
+               jugadores.remove(jugador) 
                print("Artículo eliminado correctamente")
 
-    if equipo_encontrado == False:
+    if jugador_encontrado == False:
         print("Artículo no encontrado")
-    return equipos
+    return jugadores
 
 #Funcion para mostrar el propio menu
 def menu_jugadores_mostrado():

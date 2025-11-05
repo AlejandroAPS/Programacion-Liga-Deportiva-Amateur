@@ -6,10 +6,12 @@ import Funciones_MenuPrincipal
 #ES ESTO LO DEL TABULATE ?¿?¿?¿?¿
 #variables
 equipos = []
+jugadores = []
 
 #Menu viejo,creo que lo puedo hacer sin esto:
 #menu_actual = "menu principal"
 
+#Esto no me convence del tod
 #while True:
     #if menu_actual == "menu principal":
         #print("Cargando gestión de equipos...")

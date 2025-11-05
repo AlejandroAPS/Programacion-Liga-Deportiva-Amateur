@@ -13,7 +13,7 @@ def menu_principal_interno():
             case 1:
                 Funciones_Equipos.menu_equipos_interno()
             case 2:
-                print("Menu jugadores")
+                Funciones_Jugadores.menu_jugadores_interno()
             case 3:
                 print("Menu Calendario")
             case 4:
