@@ -7,6 +7,7 @@ import Funciones_MenuPrincipal
 #variables
 equipos = []
 jugadores = []
+partidos = []
 
 #Menu viejo,creo que lo puedo hacer sin esto:
 #menu_actual = "menu principal"
