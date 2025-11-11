@@ -19,7 +19,7 @@ def menu_equipos_interno():
             case 3:
                 reprogramar_partido3(LigaDeportivaAmateur.partidos, LigaDeportivaAmateur.equipos)
             case 4:
-                print("Eliminar partido")
+                eliminar_partido4(LigaDeportivaAmateur.partidos)
             case 5:
                 Funciones_MenuPrincipal.menu_principal_interno()
             case 6:
@@ -75,7 +75,7 @@ def reprogramar_partido3(partidos):
             print("Equipo no encontrado")
     return partidos
 
-def eliminar_partido5(partidos):
+def eliminar_partido4(partidos):
     partido_encontrado = False
     print(tabulate(partidos))    
     ID_partido = str(input("¿Cual es el ID del partido a eliminar?: "))
